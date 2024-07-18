@@ -1,8 +1,9 @@
+import {Button} from '@/components/ui/button';
 
 function App() {
 	return (
 		<>
-			<h1 className='bg-green-300'>Hello everyone, welcome back!</h1>
+			<Button variant='default'>fghdfg</Button>
 		</>
 	);
 }
