@@ -1,11 +1,9 @@
 import {Button} from '@/components/ui/button';
 
-function App() {
+export const App = () => {
 	return (
 		<>
 			<Button variant='default'>fghdfg</Button>
 		</>
 	);
-}
-
-export default App;
+};
