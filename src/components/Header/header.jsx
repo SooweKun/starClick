@@ -6,7 +6,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {Link} from '@tanstack/react-router';
-import {MenuIcon} from '../MenuIcon/menuIcon.jsx';
+import {MenuIcon} from '../Icons/MenuIcon/menuIcon.jsx';
 
 const Menu = () => (
 	<DropdownMenu>

@@ -6,16 +6,10 @@ import {useCallback, useState} from 'react';
 
 export const App = () => {
 	const [countClick, setCountClick] = useState(0);
-	const [test, setTest] = useState(0);
 
 	const handleClick = useCallback(() => {
 		setCountClick(countClick + 1);
 	}, [countClick]);
-
-	const Reload = () => {
-		setTest(test + 1);
-		console.log(test);
-	};
 
 	return (
 		<>
@@ -23,7 +17,6 @@ export const App = () => {
 			<Mains
 				countClick={countClick}
 			/>
-			<button onClick={Reload}>gfgf</button>
 			<Click
 				handleClick={handleClick}
 			/>
