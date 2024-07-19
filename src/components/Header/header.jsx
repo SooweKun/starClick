@@ -36,7 +36,7 @@ const Menu = () => (
 
 export const Header = () => {
 	return (
-		<div className='flex justify-between px-10 pt-7'>
+		<div className='flex justify-between px-5 pt-7 w-full'>
 			<Menu />
 			<Button variant='outline'>Connect</Button>
 		</div>

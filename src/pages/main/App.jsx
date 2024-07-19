@@ -14,12 +14,8 @@ export const App = () => {
 	return (
 		<>
 			<Header />
-			<Mains
-				countClick={countClick}
-			/>
-			<Click
-				handleClick={handleClick}
-			/>
+			<Mains countClick={countClick}/>
+			<Click handleClick={handleClick}/>
 			<Footer/>
 		</>
 	);
