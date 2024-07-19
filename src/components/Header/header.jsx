@@ -6,21 +6,17 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import {Link, useLocation} from '@tanstack/react-router';
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {MenuIcon} from '../Icons/MenuIcon/menuIcon.jsx';
 
 const Menu = () => {
-	const location = useLocation();
+	const {pathname} = useLocation();
 	const [isOpen, setIsOpen] = useState(false);
-
-	useEffect(() => {
-		setIsOpen(false);
-	}, [location]);
 
 	const handleMenuClick = () => setIsOpen(!isOpen);
 
 	return (
-		<DropdownMenu>
+		<DropdownMenu key={pathname}>
 			<DropdownMenuTrigger asChild>
 				<button onClick={handleMenuClick}><MenuIcon width={36} height={36} fill='black' /></button>
 			</DropdownMenuTrigger>
