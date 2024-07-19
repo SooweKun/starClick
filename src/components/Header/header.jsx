@@ -5,34 +5,49 @@ import {
 	DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import {Link} from '@tanstack/react-router';
+import {Link, useLocation} from '@tanstack/react-router';
+import {useEffect, useState} from 'react';
 import {MenuIcon} from '../Icons/MenuIcon/menuIcon.jsx';
 
-const Menu = () => (
-	<DropdownMenu>
-		<DropdownMenuTrigger asChild>
-			<button><MenuIcon width={36} height={36} fill='black' /></button>
-		</DropdownMenuTrigger>
-		<DropdownMenuContent className='w-56 mx-3'>
-			<DropdownMenuLabel>Menu</DropdownMenuLabel>
-			<DropdownMenuSeparator />
-			<DropdownMenuGroup>
-				<DropdownMenuItem>
-					<Link to='/' className='w-56'>Home</Link>
-				</DropdownMenuItem>
-				<DropdownMenuItem>
-							Accaunt
-				</DropdownMenuItem>
-				<DropdownMenuItem>
-							Settings
-				</DropdownMenuItem>
-				<DropdownMenuItem>
-					<Link to='/Market' className='w-56'>Market</Link>
-				</DropdownMenuItem>
-			</DropdownMenuGroup>
-		</DropdownMenuContent>
-	</DropdownMenu>
-);
+const Menu = () => {
+	const location = useLocation();
+	const [isOpen, setIsOpen] = useState(false);
+
+	useEffect(() => {
+		setIsOpen(false);
+	}, [location]);
+
+	const handleMenuClick = () => setIsOpen(!isOpen);
+
+	return (
+		<DropdownMenu>
+			<DropdownMenuTrigger asChild>
+				<button onClick={handleMenuClick}><MenuIcon width={36} height={36} fill='black' /></button>
+			</DropdownMenuTrigger>
+
+			{isOpen && (
+				<DropdownMenuContent className='w-56 mx-3'>
+					<DropdownMenuLabel>Menu</DropdownMenuLabel>
+					<DropdownMenuSeparator />
+					<DropdownMenuGroup>
+						<DropdownMenuItem>
+							<Link to='/' className='w-56'>Home</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+						Accaunt
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link to='/Test' className='w-56'>Mains</Link>
+						</DropdownMenuItem>
+						<DropdownMenuItem>
+							<Link to='/Market' className='w-56'>Market</Link>
+						</DropdownMenuItem>
+					</DropdownMenuGroup>
+				</DropdownMenuContent>
+			)}
+		</DropdownMenu>
+	);
+};
 
 export const Header = () => {
 	return (

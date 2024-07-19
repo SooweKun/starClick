@@ -12,7 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
-import { Route as IndexImport } from './routes/index'
+import { Route as LayoutIndexImport } from './routes/_layout/index'
 import { Route as LayoutMarketIndexImport } from './routes/_layout/Market/index'
 
 // Create/Update Routes
@@ -22,9 +22,9 @@ const LayoutRoute = LayoutImport.update({
   getParentRoute: () => rootRoute,
 } as any)
 
-const IndexRoute = IndexImport.update({
+const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
-  getParentRoute: () => rootRoute,
+  getParentRoute: () => LayoutRoute,
 } as any)
 
 const LayoutMarketIndexRoute = LayoutMarketIndexImport.update({
@@ -36,19 +36,19 @@ const LayoutMarketIndexRoute = LayoutMarketIndexImport.update({
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexImport
-      parentRoute: typeof rootRoute
-    }
     '/_layout': {
       id: '/_layout'
       path: ''
       fullPath: ''
       preLoaderRoute: typeof LayoutImport
       parentRoute: typeof rootRoute
+    }
+    '/_layout/': {
+      id: '/_layout/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof LayoutIndexImport
+      parentRoute: typeof LayoutImport
     }
     '/_layout/Market/': {
       id: '/_layout/Market/'
@@ -63,8 +63,10 @@ declare module '@tanstack/react-router' {
 // Create and export the route tree
 
 export const routeTree = rootRoute.addChildren({
-  IndexRoute,
-  LayoutRoute: LayoutRoute.addChildren({ LayoutMarketIndexRoute }),
+  LayoutRoute: LayoutRoute.addChildren({
+    LayoutIndexRoute,
+    LayoutMarketIndexRoute,
+  }),
 })
 
 /* prettier-ignore-end */
@@ -75,18 +77,19 @@ export const routeTree = rootRoute.addChildren({
     "__root__": {
       "filePath": "__root.jsx",
       "children": [
-        "/",
         "/_layout"
       ]
-    },
-    "/": {
-      "filePath": "index.jsx"
     },
     "/_layout": {
       "filePath": "_layout.jsx",
       "children": [
+        "/_layout/",
         "/_layout/Market/"
       ]
+    },
+    "/_layout/": {
+      "filePath": "_layout/index.jsx",
+      "parent": "/_layout"
     },
     "/_layout/Market/": {
       "filePath": "_layout/Market/index.jsx",
