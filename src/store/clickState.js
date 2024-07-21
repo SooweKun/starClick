@@ -1,8 +1,7 @@
 import {create} from 'zustand';
 
-export const useClickStore = create((set, get) => ({
+export const useClickStore = create(set => ({
 	click: 0,
-	incriment: click => set(click + 1),
-	getClicks: () => get.users,
+	incriment: () => set(state => ({click: state.click + 1})),
 }));
 
