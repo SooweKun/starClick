@@ -1,13 +1,13 @@
 import {Click} from '@/components/Click/click';
 import {Mains} from '@/components/Mains/mains';
+import {useClickStore} from '@/store/clickState';
 import {useSpring} from '@react-spring/web';
-import {useCallback, useState} from 'react';
+import {useCallback} from 'react';
 
 export const App = () => {
-	const [countClick, setCountClick] = useState(0);
-
+	const {click, incriment} = useClickStore();
 	const handleClick = useCallback(() => {
-		setCountClick(countClick + 1);
+		incriment(click);
 
 		api.start({
 			from: {
@@ -37,7 +37,7 @@ export const App = () => {
 				});
 			},
 		});
-	}, [countClick]);
+	}, [click]);
 
 	const [spring, api] = useSpring(() => ({
 		from: {
@@ -53,7 +53,7 @@ export const App = () => {
 	const [springSmallStar, apiSmallStar] = useSpring(() => ({
 		from: {
 			scale: 1,
-			opacity: 1,
+			opacity: 0,
 		},
 		config: {
 			duration: 500,
@@ -67,7 +67,7 @@ export const App = () => {
 
 	return (
 		<>
-			<Mains countClick={countClick}/>
+			<Mains countClick={click}/>
 			<Click
 				handleClick={handleClick}
 				spring={spring}
