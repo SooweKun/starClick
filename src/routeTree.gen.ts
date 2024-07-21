@@ -13,6 +13,7 @@
 import { Route as rootRoute } from './routes/__root'
 import { Route as LayoutImport } from './routes/_layout'
 import { Route as LayoutIndexImport } from './routes/_layout/index'
+import { Route as LayoutSettingsIndexImport } from './routes/_layout/Settings/index'
 import { Route as LayoutMarketIndexImport } from './routes/_layout/Market/index'
 
 // Create/Update Routes
@@ -24,6 +25,11 @@ const LayoutRoute = LayoutImport.update({
 
 const LayoutIndexRoute = LayoutIndexImport.update({
   path: '/',
+  getParentRoute: () => LayoutRoute,
+} as any)
+
+const LayoutSettingsIndexRoute = LayoutSettingsIndexImport.update({
+  path: '/Settings/',
   getParentRoute: () => LayoutRoute,
 } as any)
 
@@ -57,6 +63,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LayoutMarketIndexImport
       parentRoute: typeof LayoutImport
     }
+    '/_layout/Settings/': {
+      id: '/_layout/Settings/'
+      path: '/Settings'
+      fullPath: '/Settings'
+      preLoaderRoute: typeof LayoutSettingsIndexImport
+      parentRoute: typeof LayoutImport
+    }
   }
 }
 
@@ -66,6 +79,7 @@ export const routeTree = rootRoute.addChildren({
   LayoutRoute: LayoutRoute.addChildren({
     LayoutIndexRoute,
     LayoutMarketIndexRoute,
+    LayoutSettingsIndexRoute,
   }),
 })
 
@@ -84,7 +98,8 @@ export const routeTree = rootRoute.addChildren({
       "filePath": "_layout.jsx",
       "children": [
         "/_layout/",
-        "/_layout/Market/"
+        "/_layout/Market/",
+        "/_layout/Settings/"
       ]
     },
     "/_layout/": {
@@ -93,6 +108,10 @@ export const routeTree = rootRoute.addChildren({
     },
     "/_layout/Market/": {
       "filePath": "_layout/Market/index.jsx",
+      "parent": "/_layout"
+    },
+    "/_layout/Settings/": {
+      "filePath": "_layout/Settings/index.jsx",
       "parent": "/_layout"
     }
   }

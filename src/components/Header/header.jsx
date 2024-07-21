@@ -28,7 +28,7 @@ const Menu = () => {
 						Accaunt
 					</DropdownMenuItem>
 					<DropdownMenuItem>
-						<Link to='/Test' className='w-56'>Mains</Link>
+						<Link to='/Settings' className='w-56'>Settings</Link>
 					</DropdownMenuItem>
 					<DropdownMenuItem>
 						<Link to='/Market' className='w-56'>Market</Link>
