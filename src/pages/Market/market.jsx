@@ -9,7 +9,7 @@ import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
 import {useContext} from 'react';
 
-const MarketPage = ({iconsComponenst, invorements, userInvorements}) => {
+const MarketContent = ({iconsComponenst, invorements, userInvorements}) => {
 	const {invorementsPage, setPage} = useContext(UserInvorementsContext);
 	return (
 		<div className='flex flex-col gap-4 px-5'>
@@ -84,7 +84,7 @@ export const Market = () => {
 	return (
 		<div className='pt-10 flex flex-col gap-2 h-full'>
 			<UserInvorementsContextProvider>
-				<MarketPage {...{iconsComponenst: IconsComponenst, invorements, userInvorements}} />
+				<MarketContent {...{iconsComponenst: IconsComponenst, invorements, userInvorements}} />
 			</UserInvorementsContextProvider>
 		</div>
 	);
