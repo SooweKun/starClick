@@ -1,6 +1,6 @@
 import {Button} from '@/components/ui/button';
 
-export const MarketItem = ({children, index}) => (
+export const MarketItem = ({children, index, itemName, value}) => (
 
 	<div className='px-5' key={index}>
 		<div className='flex justify-between'>
@@ -9,8 +9,8 @@ export const MarketItem = ({children, index}) => (
 					{children}
 				</div>
 				<div>
-					<h1>Прибыль в час</h1>
-					<p>Value: 3</p>
+					<h1>{itemName}</h1>
+					<p>Value: {value}</p>
 				</div>
 			</div>
 			<Button>Прокачать</Button>

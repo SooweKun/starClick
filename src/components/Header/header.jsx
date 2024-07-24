@@ -60,7 +60,7 @@ export const Header = () => {
 		enabled: initDataRaw !== '',
 	});
 
-	const {addUser} = useUserStore();
+	const setUser = useUserStore(state => state.addUser);
 
 	if (isError) {
 		throw error;
@@ -71,8 +71,9 @@ export const Header = () => {
 	}
 
 	if (data) {
-		console.log(data);
-		addUser(data);
+		setUser({
+			...data,
+		});
 	}
 
 	return (
