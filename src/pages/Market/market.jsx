@@ -2,6 +2,7 @@
 import {Three} from '@/components/Icons/ForMarket/three';
 import {Two} from '@/components/Icons/ForMarket/two';
 import {MarketItem} from '@/components/Marketitem/marketItem';
+import {Switch} from '@/components/ui/switch';
 import {useUserStore} from '@/store/userState';
 import {useQuery} from '@tanstack/react-query';
 import axios from 'axios';
@@ -31,21 +32,23 @@ export const Market = () => {
 		select: ({data}) => data,
 	});
 
-	const {data: userInvorements} = useQuery({
+	const {data: userInvorements, isSuccess} = useQuery({
 		queryKey: ['userInvorements'],
 		queryFn: getUserInvorements,
-		enabled: user === true,
+		select: ({data}) => data,
 	});
+
+	console.log(userInvorements, 'fff');
 
 	return (
 		<div className='pt-10 flex flex-col gap-2 h-full'>
-			{/*
-				1 элемент магазина
-			*/}
-
+			<div className='flex flex-row gap-5 items-center justify-center'>
+				<p>ffff</p>
+				<Switch />
+			</div>
 			{
 				invorements && invorements.map((item, index) => (
-					<MarketItem key={index} itemName={item.name} value={userInvorements.value}>
+					<MarketItem key={index} itemName={item.name} data={isSuccess ? userInvorements[0].value : 'none'}>
 						{
 							IconsComponenst[index]
 						}

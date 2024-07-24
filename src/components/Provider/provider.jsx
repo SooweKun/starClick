@@ -14,3 +14,4 @@ export const Provider = () => (
 		<RouterProvider router={router}/>
 	</QueryClientProvider>
 );
+
