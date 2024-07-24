@@ -66,10 +66,6 @@ export const Header = () => {
 		throw error;
 	}
 
-	if (isLoading) {
-		return <div>Loading...</div>;
-	}
-
 	if (data) {
 		setUser({
 			...data,
@@ -79,7 +75,10 @@ export const Header = () => {
 	return (
 		<div className='flex justify-between px-5 pt-7 w-full'>
 			<Menu />
-			<div className='flex bg-black rounded-sm w-auto h-[36px] gap-2 justify-center items-center text-white px-3'>{data.first_name}</div>
+			<div
+				className='flex bg-black rounded-sm w-auto h-[36px] gap-2 justify-center items-center text-white px-3 transition-width duration-300 ease-in-out'>
+				{isLoading ? <p>Loading...</p> : <p>{data?.username}</p>}
+			</div>
 		</div>
 	);
 };

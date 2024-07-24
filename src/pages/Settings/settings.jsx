@@ -1,13 +1,23 @@
-import {Button} from '@/components/ui/button';
+import {UserInvorementsContext, UserInvorementsContextProvider} from '@/components/Provider/provider.context';
+import {Switch} from '@/components/ui/switch';
+import {useContext} from 'react';
+
+const Setting = () => {
+	const {invorementsPage, setPage} = useContext(UserInvorementsContext);
+	return (
+		<div className='flex flex-row gap-1 bg-black rounded-sm px-4 py-2 text-white items-center justify-center'>
+			<h1>{invorementsPage}</h1>
+			<Switch onCheckedChange={() => setPage()} />
+		</div>
+	);
+};
 
 export const Settings = () => {
 	return (
-		<div className='flex  mt-1 border-t-[1px] border-t-black flex-col'>
-			<p className='pt-5 flex justify-center'>Settings</p>
-			<div className='flex flex-col gap-3 pl-[33px] pt-2'>
-				<Button className='w-80 h-14  justify-center'>change accaunt</Button>
-				<Button className='w-80 h-14  justify-center'>animations</Button>
-			</div>
+		<div className='flex items-center justify-center'>
+			<UserInvorementsContextProvider>
+				<Setting/>
+			</UserInvorementsContextProvider>
 		</div>
 	);
 };
