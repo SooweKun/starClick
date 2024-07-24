@@ -5,10 +5,10 @@ import {
 	DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {useQuery} from '@tanstack/react-query';
 import {Link, useLocation} from '@tanstack/react-router';
 import {retrieveLaunchParams} from '@telegram-apps/sdk';
 import axios from 'axios';
-import {useEffect} from 'react';
 import {MenuIcon} from '../Icons/MenuIcon/menuIcon.jsx';
 
 const Menu = () => {
@@ -42,7 +42,6 @@ const Menu = () => {
 };
 
 export const Header = () => {
-	const [userData, setUserData] = useState({});
 	const {initDataRaw} = retrieveLaunchParams();
 	console.log(initDataRaw);
 
@@ -54,26 +53,19 @@ export const Header = () => {
 		return data;
 	};
 
-	useEffect({
-		axios.post('http://127.0.0.1:3000/api/auth/register', {
-			init_data: initDataRaw,
-		})
-	}, [initDataRaw]);
+	const {data, isLoading, isError, error} = useQuery({
+		queryKey: ['user'],
+		queryFn: registerUser,
+		enabled: initDataRaw !== '',
+	});
 
-	
-	// Const {data, isLoading, isError, error} = useQuery({
-	// 	queryKey: ['user'],
-	// 	queryFn: registerUser,
-	// 	enabled: initDataRaw !== '',
-	// });
+	if (isError) {
+		throw error;
+	}
 
-	// if (isError) {
-	// 	throw error;
-	// }
-
-	// if (isLoading) {
-	// 	return <div>Loading...</div>;
-	// }
+	if (isLoading) {
+		return <div>Loading...</div>;
+	}
 
 	console.log(data);
 	return (
