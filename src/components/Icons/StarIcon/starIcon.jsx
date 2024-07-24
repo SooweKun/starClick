@@ -1,4 +1,3 @@
-
 import {animated} from '@react-spring/web';
 
 export const StarIcon = ({width, height, stroke, handleClick, spring, className}) => {
