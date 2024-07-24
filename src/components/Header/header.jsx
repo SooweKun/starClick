@@ -5,6 +5,7 @@ import {
 	DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import {useUserStore} from '@/store/userState.js';
 import {useQuery} from '@tanstack/react-query';
 import {Link, useLocation} from '@tanstack/react-router';
 import {retrieveLaunchParams} from '@telegram-apps/sdk';
@@ -59,6 +60,8 @@ export const Header = () => {
 		enabled: initDataRaw !== '',
 	});
 
+	const {addUser} = useUserStore();
+
 	if (isError) {
 		throw error;
 	}
@@ -67,11 +70,15 @@ export const Header = () => {
 		return <div>Loading...</div>;
 	}
 
-	console.log(data);
+	if (data) {
+		console.log(data);
+		addUser(data);
+	}
+
 	return (
 		<div className='flex justify-between px-5 pt-7 w-full'>
 			<Menu />
-			<div className='flex bg-black rounded-sm w-auto h-[36px] gap-2 justify-center items-center text-white px-3'>{data.name}</div>
+			<div className='flex bg-black rounded-sm w-auto h-[36px] gap-2 justify-center items-center text-white px-3'>{data.first_name}</div>
 		</div>
 	);
 };
